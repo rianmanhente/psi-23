@@ -8,12 +8,18 @@ const seedAdress = async function () {
 
     const adressData = [
       {
-        cep: "22795045"
+        cep: "22795045",
+        streetName: "rua josé américo de almeida"
       },
       {
-        cep: "22795047"
-      },    {
-        cep: "22795049"
+        cep: "22795047",
+        streetName: "rua Gustavo corção"
+
+      },   
+      {
+        cep: "22795049",
+        streetName: "rua Joao paulo"
+
       },
     ];
 

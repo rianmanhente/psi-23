@@ -5,6 +5,10 @@ const Adress = sequelize.define('Adress', {
     cep: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    streetName : {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 });
 
