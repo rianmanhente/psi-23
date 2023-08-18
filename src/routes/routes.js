@@ -1,8 +1,9 @@
 const { Router } = require("express");
 const router = Router();
-const CartController = require("../controllers/CartController")
+const CartController = require("../controllers/CartController");
 const ProductController = require("../controllers/ProductController");
 const UserController = require("../controllers/UserController");
+const AdressController = require("../controllers/AdressController");
 const multer = require("multer");
 const path = require("node:path");
 
@@ -47,5 +48,11 @@ router.get("/Cart/:id", CartController.show);//
 router.get("/Cart", CartController.index);//
 router.put("/Cart/:id", CartController.update);//
 router.delete("/Cart/:id", CartController.destroy);//
+
+router.post("/Adress", AdressController.create);//
+router.get("/Adress", AdressController.index);//
+router.delete("/Adress/:id", AdressController.destroy);//
+router.put("/Adress/User/:userId/Adress/:adressId", AdressController.AdressAssociateUser)
+
 
 module.exports = router;

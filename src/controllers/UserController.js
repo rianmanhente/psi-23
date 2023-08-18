@@ -1,7 +1,6 @@
 const {Op} = require('sequelize');
 const User = require('../models/User');
 const Auth = require('../config/Auth');
-// const axios = require('axios');
 const fetch = require('node-fetch').default;
 
 const index = async(req, res) =>{
