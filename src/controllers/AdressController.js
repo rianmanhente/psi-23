@@ -48,9 +48,22 @@ const AdressAssociateUser = async(req,res) => {
     }
 }
 
+const AdressDissociateUser = async(req,res) => {
+    try {
+        const {adressId} = req.params;
+        const adress = await Adress.findByPk(adressId);
+        await adress.setUser(null);
+
+        return res.status(200).json({msg: "Adress disassociated."});
+    }catch(err){
+        return res.status(500).json({err});
+    }
+}
+
 module.exports = {
     create,
     index,
     destroy,
-    AdressAssociateUser
+    AdressAssociateUser,
+    AdressDissociateUser
 }

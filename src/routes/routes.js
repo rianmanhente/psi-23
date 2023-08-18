@@ -53,6 +53,7 @@ router.post("/Adress", AdressController.create);//
 router.get("/Adress", AdressController.index);//
 router.delete("/Adress/:id", AdressController.destroy);//
 router.put("/Adress/User/:userId/Adress/:adressId", AdressController.AdressAssociateUser)
+router.put("/Adress/:adressId", AdressController.AdressDissociateUser)
 
 
 module.exports = router;
