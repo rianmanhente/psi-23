@@ -50,7 +50,6 @@ const create = async(req,res) => {
         const newProduct = {
             name: req.body.name,
             price: req.body.price,
-            description: req.body.description,
             category: req.body.category,
             image: imagePath
         }

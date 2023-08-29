@@ -1,68 +1,120 @@
-import { useScrollToTop } from '@react-navigation/native';
-import LoginAndRegister from '../../components/Login&SignUp/Login&SignUp';
-import { Container, Logo, Form, Subtittle, Tittle, Virtual, Login, ContainerForm, LabelsForm, InputEmail, InputName, InputPassword  } from './style';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import LoginAndRegister from '../../components/Login&SignUp/Login&SignUp';
 import { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { styles } from './styles'; 
+import LoginAndRegister from '../../components/LogIn&SignUp/buttons';
+import api from '../../services/api';
+import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
+
+
 
 export default function Register() {
-
-  // function oi(e : any) {
-  //   e.preventDefault()
-  //   console.log("oi")
-  // }
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [file, setFile] = useState("");
 
-  const createUser = (e: any) => {
+  const navigation = useNavigation();
 
-    const dataUser = new FormData();
-    dataUser.append("name", name);
-    dataUser.append("email", email);
-    dataUser.append("password", password);
-    dataUser.append("image", file);
+  const showToastSuccess = () => {
+    // Duração em milissegundos
+  };
+
+
+const showErrorMessage = () => {
+ 
+};
+
+  const createUser = async (e: any) => {
+  
+    console.log(name)
+
+    // console.log("Oi")    
+    const dataUser = {
+    name: name,
+    email: email,
+    password: password,
+
+    }
+
+    api.post("/User", dataUser)
+    .then((res  => {
+      Toast.show({
+        type: "success",
+        text1: "success ;)",
+        text2:"Usuário cadastrado com sucesso",
+        visibilityTime: 2500,
+        position: 'top',
+        topOffset: 20,
+      })
+      navigation.navigate('Login')
+    }))
+    .catch((error) => {
+      Toast.show({
+        type: "error",
+        text1: "error ;(",
+        text2:"Ocorreu um erro tente novamente",
+        visibilityTime: 2500,
+        position: 'top',
+        topOffset: 20,
+      })
+    })
+
+
 
   }
 
   return (
-    <Container>
-        <Logo>
-        <Icon name="shopping-bag" size={24} color="#453B59" />
-        <Tittle>
-          EcommerceApp
-        </Tittle>
-        </Logo>
- 
-        <Subtittle>
-          A new way to experince ecommerce in this
-        </Subtittle>
-        <Virtual>
-        virtual space
-        </Virtual>
+    <View style={styles.container}>
+        <View style={styles.logo}>
+            <Text style={styles.title}>
+                EcommerceApp
+            </Text>
+        </View>
 
-      <ContainerForm>
-      <Form>
-          <Login>
-            Register!
-          </Login>
-          <LabelsForm>
-            Name
-          </LabelsForm>
-          <InputName value={name} onChange={(e : any) => setName(e.target.value)}/>
-          <LabelsForm>
-            Email
-          </LabelsForm>
-          <InputEmail value={email} onChange={(e : any) => setName(e.target.value)}/>
-          <LabelsForm>
-            Password
-          </LabelsForm>
-          <InputPassword value={password} onChange={(e : any) => setEmail(e.target.value)}/>
-        <LoginAndRegister firstText={'Sign up'} secondText={'Logout'} onPressFunction={(e : any) => createUser(e)}/>
-        </Form>
-      </ContainerForm>
-      
-    </Container>
+        <Text style={styles.subtitle}>
+        Uma nova forma de comprar online
+        </Text>
+
+        <View style={styles.containerForm}>
+            <View style={styles.divForm}>
+            <Text style={styles.register}>
+                Registre-se!
+            </Text>
+            <Text style={styles.labelsForm}>
+                Nome
+            </Text>
+            <TextInput 
+            style={styles.input}
+            value={name}
+            onChange={(e: any) => setName(e.target.value)}
+            />
+            <Text style={styles.labelsForm}>
+                Email
+            </Text>
+            <TextInput 
+            style={styles.input}
+            value={email}
+            onChange={(e: any) => setEmail(e.target.value)} 
+            />
+            <Text style={styles.labelsForm}>
+                Senha
+            </Text>
+            <TextInput 
+            style={styles.input}
+            value={password}
+            onChange={(e: any) => setPassword(e.target.value)}
+             />
+            <LoginAndRegister firstText={'Registre-se'} secondText={'Logout'} onPressFunction={(e : any) => createUser(e)}/>
+            </View>
+        </View>
+
+
+    </View>
+
+
   );
 }
+
+

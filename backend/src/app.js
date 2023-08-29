@@ -3,6 +3,7 @@ const session = require('express-session');
 require('./config/dotenv')();
 require('./config/sequelize');
 require('./config/Auth');
+const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT;
@@ -14,6 +15,13 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+
+app.use(cors());
+
+app.use(cors({
+  origin: 'http://localhost:19006' // Ou a URL da sua aplicação React Native
+}));
+
 
 const passport = require("passport");
 require("./middlewares/jwtPassport")(passport);
