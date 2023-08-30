@@ -16,10 +16,12 @@ app.use(session({
   saveUninitialized: true
 }));
 
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:19006'];
+
 app.use(cors());
 
 app.use(cors({
-  origin: 'http://localhost:19006' // Ou a URL da sua aplicação React Native
+  origin: allowedOrigins // Ou a URL da sua aplicação React Native
 }));
 
 
